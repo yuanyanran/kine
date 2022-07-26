@@ -14,7 +14,7 @@ func (l *LimitedServer) put(ctx context.Context, r *etcdserverpb.PutRequest) (*e
 	var ok bool
 	var rev int64
 
-	_, kv, err := l.backend.Get(ctx, string(r.Key), 0)
+	_, kv, err := l.backend.Get(ctx, string(r.Key), "", 1, 0)
 	if err != nil {
 		return nil, err
 	}

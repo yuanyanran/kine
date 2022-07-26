@@ -17,7 +17,7 @@ func (l *LimitedServer) get(ctx context.Context, r *etcdserverpb.RangeRequest) (
 	if len(r.RangeEnd) == 0 && strings.HasSuffix(key, "/") {
 		key = strings.TrimSuffix(key, "/")
 	}
-	rev, kv, err := l.backend.Get(ctx, key, r.Revision)
+	rev, kv, err := l.backend.Get(ctx, key, string(r.RangeEnd), r.Limit, r.Revision)
 	if err != nil {
 		return nil, err
 	}
